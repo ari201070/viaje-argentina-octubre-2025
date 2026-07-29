@@ -1,93 +1,112 @@
 import cities from "./data/cities.json"
 
-const trip = {
-  title: "Argentina · Aventura Familiar de 30 Días",
-  subtitle: "Viaje realizado · Octubre 2025",
-  travelers: "2 adultos + 2 hijos",
-  duration: "30 días"
-}
-
 export default function App(){
 
 return(
 
 <div style={{
-background:"#f4f6f8",
 minHeight:"100vh",
-padding:"40px",
+background:"#eef3f8",
 fontFamily:"Segoe UI,Arial,sans-serif"
 }}>
 
+<header style={{
+background:"linear-gradient(135deg,#0057b8,#0099ff)",
+color:"white",
+padding:"60px 40px"
+}}>
+
 <div style={{
-maxWidth:"1200px",
+maxWidth:"1300px",
 margin:"auto"
 }}>
 
-<header style={{
-background:"#1565c0",
-color:"white",
-padding:"35px",
-borderRadius:"18px",
-boxShadow:"0 8px 25px rgba(0,0,0,.15)"
+<h1 style={{
+fontSize:"48px",
+margin:0
 }}>
-
-<h1 style={{margin:0}}>
-🇦🇷 {trip.title}
+🇦🇷 Argentina
 </h1>
 
-<p>{trip.subtitle}</p>
+<h2 style={{
+fontWeight:"400",
+marginTop:"10px"
+}}>
+Aventura Familiar · Octubre 2025
+</h2>
 
 <div style={{
 display:"flex",
-gap:"20px",
+gap:"15px",
 flexWrap:"wrap",
-marginTop:"20px"
+marginTop:"35px"
 }}>
 
-<div>👨‍👩‍👧‍👦 {trip.travelers}</div>
-<div>🗓 {trip.duration}</div>
-<div>🌎 Open Source</div>
+<button>🏠 Inicio</button>
+<button>🗺 Itinerario</button>
+<button>📖 Diario</button>
+<button>📸 Fotos</button>
+<button>🥾 Wikiloc</button>
+<button>🌎 Mapa</button>
+
+</div>
 
 </div>
 
 </header>
 
-<div style={{
+<main style={{
+maxWidth:"1300px",
+margin:"40px auto",
 display:"grid",
-gridTemplateColumns:"2fr 1fr",
+gridTemplateColumns:"3fr 1fr",
 gap:"25px",
-marginTop:"30px"
+padding:"0 20px"
 }}>
 
 <section>
 
-<h2>Itinerario</h2>
+<div style={{
+background:"white",
+borderRadius:"15px",
+padding:"25px",
+boxShadow:"0 5px 15px rgba(0,0,0,.08)"
+}}>
+
+<h2>🗺 Itinerario</h2>
+
+<div style={{
+display:"grid",
+gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",
+gap:"18px",
+marginTop:"25px"
+}}>
 
 {cities.map(city=>(
 
 <div
 key={city.id}
 style={{
-background:"white",
-padding:"18px",
-marginBottom:"15px",
+border:"1px solid #ddd",
 borderRadius:"12px",
-boxShadow:"0 3px 10px rgba(0,0,0,.08)",
-transition:".3s"
+padding:"20px",
+background:"#fafafa"
 }}
 >
 
-<h3 style={{marginBottom:"5px"}}>
-
-📍 {city.name}
-
-</h3>
+<h3>{city.name}</h3>
 
 <p>{city.days||"Próximamente"}</p>
+
+<button>Ver ciudad</button>
 
 </div>
 
 ))}
+
+</div>
+
+</div>
 
 </section>
 
@@ -96,54 +115,58 @@ transition:".3s"
 <div style={{
 background:"white",
 padding:"20px",
-borderRadius:"12px",
-boxShadow:"0 3px 10px rgba(0,0,0,.08)",
-marginBottom:"20px"
+borderRadius:"15px",
+marginBottom:"20px",
+boxShadow:"0 5px 15px rgba(0,0,0,.08)"
 }}>
 
-<h2>Estado</h2>
+<h2>📊 Proyecto</h2>
 
-<p>🟢 React</p>
-<p>🟢 GitHub</p>
-<p>🟢 Develop</p>
-<p>🟢 Arquitectura</p>
+<p>Versión 0.1.0</p>
+<p>Sprint 3</p>
+<p>React + Vite</p>
+<p>OpenStreetMap</p>
+<p>GitHub Flow</p>
 
 </div>
 
 <div style={{
 background:"white",
 padding:"20px",
-borderRadius:"12px",
-boxShadow:"0 3px 10px rgba(0,0,0,.08)"
+borderRadius:"15px",
+boxShadow:"0 5px 15px rgba(0,0,0,.08)"
 }}>
 
-<h2>Roadmap</h2>
+<h2>🚀 Próximos módulos</h2>
 
-<p>⬜ OpenStreetMap</p>
-<p>⬜ Wikiloc</p>
-<p>⬜ Diario</p>
-<p>⬜ Fotos</p>
-<p>⬜ Timeline</p>
-<p>⬜ Traducciones</p>
-<p>⬜ IA Local</p>
+<ul>
+
+<li>Timeline</li>
+<li>Mapa</li>
+<li>Galería</li>
+<li>Restaurantes</li>
+<li>Hoteles</li>
+<li>Actividades</li>
+<li>Presupuesto</li>
+<li>IA</li>
+
+</ul>
 
 </div>
 
 </aside>
 
-</div>
+</main>
 
 <footer style={{
-marginTop:"50px",
 textAlign:"center",
+padding:"35px",
 color:"#666"
 }}>
 
-Version 0.0.3 · Sprint 2
+Version 0.1.0 · Sprint 3
 
 </footer>
-
-</div>
 
 </div>
 
