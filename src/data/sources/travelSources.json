@@ -1,0 +1,288 @@
+{
+    "generatedAt":  "2026-07-30",
+    "purpose":  "Inventory of external Argentina October 2025 family trip sources and imported small assets.",
+    "imported":  {
+                     "documents":  [
+                                       {
+                                           "name":  "Booking_Argentina_2025_Hoteles.png",
+                                           "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre\\Booking_Argentina_2025_Hoteles.png",
+                                           "repoPath":  "public/travel-documents/Booking_Argentina_2025_Hoteles.png",
+                                           "bytes":  133851,
+                                           "lastModified":  "2026-06-16T21:33:26+03:00"
+                                       },
+                                       {
+                                           "name":  "Confirmación_Fuente Mayor Hotel Centro.pdf",
+                                           "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre\\Confirmación_Fuente Mayor Hotel Centro.pdf",
+                                           "repoPath":  "public/travel-documents/Confirmación_Fuente Mayor Hotel Centro.pdf",
+                                           "bytes":  184852,
+                                           "lastModified":  "2025-10-15T00:30:22+03:00"
+                                       },
+                                       {
+                                           "name":  "itinerary_Y0HBMB59-1.pdf",
+                                           "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre\\itinerary_Y0HBMB59-1.pdf",
+                                           "repoPath":  "public/travel-documents/itinerary_Y0HBMB59-1.pdf",
+                                           "bytes":  421593,
+                                           "lastModified":  "2025-10-15T02:46:50+03:00"
+                                       },
+                                       {
+                                           "name":  "Screenshot_20251011_142528_Bookingcom.jpg",
+                                           "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre\\Screenshot_20251011_142528_Bookingcom.jpg",
+                                           "repoPath":  "public/travel-documents/Screenshot_20251011_142528_Bookingcom.jpg",
+                                           "bytes":  575141,
+                                           "lastModified":  "2026-01-03T10:04:44+02:00"
+                                       },
+                                       {
+                                           "name":  "Screenshot_20251018_181403_Bookingcom.jpg",
+                                           "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre\\Screenshot_20251018_181403_Bookingcom.jpg",
+                                           "repoPath":  "public/travel-documents/Screenshot_20251018_181403_Bookingcom.jpg",
+                                           "bytes":  393069,
+                                           "lastModified":  "2026-01-03T10:01:10+02:00"
+                                       },
+                                       {
+                                           "name":  "ticket_NTTZSH47.pdf",
+                                           "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre\\ticket_NTTZSH47.pdf",
+                                           "repoPath":  "public/travel-documents/ticket_NTTZSH47.pdf",
+                                           "bytes":  178725,
+                                           "lastModified":  "2025-10-05T19:53:18+03:00"
+                                       }
+                                   ],
+                     "legacyDatabase":  {
+                                            "repoPath":  "legacy/photo_catalog.db",
+                                            "originalPath":  "C:\\Users\\flier\\GitHub\\photo_catalog.db",
+                                            "bytes":  0,
+                                            "note":  "Empty SQLite/database placeholder at import time."
+                                        },
+                     "references":  [
+                                        {
+                                            "name":  "IMG-20251025-WA0014.jpg",
+                                            "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\IMG-20251025-WA0014.jpg",
+                                            "repoPath":  "public/travel-references/IMG-20251025-WA0014.jpg",
+                                            "bytes":  418245,
+                                            "lastModified":  "2025-10-26T02:14:35+02:00"
+                                        },
+                                        {
+                                            "name":  "Screenshot_20251014_141216_Chrome.jpg",
+                                            "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\Screenshot_20251014_141216_Chrome.jpg",
+                                            "repoPath":  "public/travel-references/Screenshot_20251014_141216_Chrome.jpg",
+                                            "bytes":  309722,
+                                            "lastModified":  "2026-01-03T10:03:48+02:00"
+                                        },
+                                        {
+                                            "name":  "Screenshot_20251014_151450_Chrome.jpg",
+                                            "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\Screenshot_20251014_151450_Chrome.jpg",
+                                            "repoPath":  "public/travel-references/Screenshot_20251014_151450_Chrome.jpg",
+                                            "bytes":  268860,
+                                            "lastModified":  "2026-01-03T10:03:42+02:00"
+                                        },
+                                        {
+                                            "name":  "Screenshot_20251014_151643_Xe.jpg",
+                                            "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\Screenshot_20251014_151643_Xe.jpg",
+                                            "repoPath":  "public/travel-references/Screenshot_20251014_151643_Xe.jpg",
+                                            "bytes":  330985,
+                                            "lastModified":  "2026-01-03T10:03:40+02:00"
+                                        },
+                                        {
+                                            "name":  "Screenshot_20251014_151959_Xe.jpg",
+                                            "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\Screenshot_20251014_151959_Xe.jpg",
+                                            "repoPath":  "public/travel-references/Screenshot_20251014_151959_Xe.jpg",
+                                            "bytes":  328172,
+                                            "lastModified":  "2026-01-03T10:03:36+02:00"
+                                        },
+                                        {
+                                            "name":  "Screenshot_20251028_112431_Maps.jpg",
+                                            "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\Screenshot_20251028_112431_Maps.jpg",
+                                            "repoPath":  "public/travel-references/Screenshot_20251028_112431_Maps.jpg",
+                                            "bytes":  806624,
+                                            "lastModified":  "2026-01-03T09:58:46+02:00"
+                                        }
+                                    ]
+                 },
+    "externalSources":  {
+                            "travelDocuments":  {
+                                                    "originalPath":  "F:\\Documentos_Viaje\\2025\\Octubre",
+                                                    "bytes":  1887231,
+                                                    "fileCount":  6,
+                                                    "note":  "Small document set copied into public/travel-documents."
+                                                },
+                            "familyAlbum":  {
+                                                "note":  "Large media archive intentionally referenced instead of fully copied into Git.",
+                                                "byFolder":  [
+                                                                 {
+                                                                     "name":  "יום 10 - וילה טראפול ושבעת האגמים",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 10 - וילה טראפול ושבעת האגמים",
+                                                                     "fileCount":  276,
+                                                                     "bytes":  1445441457
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 11 - ברילוצ\u0027ה מרכז",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 11 - ברילוצ\u0027ה מרכז",
+                                                                     "fileCount":  133,
+                                                                     "bytes":  488047634
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 12 - וילה טראפול ושבעת האגמים",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 12 - וילה טראפול ושבעת האגמים",
+                                                                     "fileCount":  249,
+                                                                     "bytes":  1203271215
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 13 - אל בולסון - ריו אזול",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 13 - אל בולסון - ריו אזול",
+                                                                     "fileCount":  59,
+                                                                     "bytes":  219879706
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 14 - ברילוצ\u0027ה מרכז",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 14 - ברילוצ\u0027ה מרכז",
+                                                                     "fileCount":  25,
+                                                                     "bytes":  106202492
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 15 - mendoza",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 15 - mendoza",
+                                                                     "fileCount":  105,
+                                                                     "bytes":  505607170
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 16 - mendoza",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 16 - mendoza",
+                                                                     "fileCount":  31,
+                                                                     "bytes":  116796105
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 17 - פואנטה דל אינקה ואנדים",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 17 - פואנטה דל אינקה ואנדים",
+                                                                     "fileCount":  113,
+                                                                     "bytes":  697293554
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 19 - סלטה מרכז - סן לורנסו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 19 - סלטה מרכז - סן לורנסו",
+                                                                     "fileCount":  134,
+                                                                     "bytes":  605147845
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 20 - סלטה מרכז - סן לורנסו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 20 - סלטה מרכז - סן לורנסו",
+                                                                     "fileCount":  116,
+                                                                     "bytes":  590384977
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 21 - סלינאס גרנדס וקואסטה דל ליפאן",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 21 - סלינאס גרנדס וקואסטה דל ליפאן",
+                                                                     "fileCount":  191,
+                                                                     "bytes":  866545534
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 22 - סלטה מרכז - סן לורנסו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 22 - סלטה מרכז - סן לורנסו",
+                                                                     "fileCount":  27,
+                                                                     "bytes":  113686636
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 23 - נסיעה לאיגואסו - צ\u0027אקו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 23 - נסיעה לאיגואסו - צ\u0027אקו",
+                                                                     "fileCount":  25,
+                                                                     "bytes":  85019263
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 24 - מפלי איגואסו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 24 - מפלי איגואסו",
+                                                                     "fileCount":  289,
+                                                                     "bytes":  1350764251
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 25 - מפלי איגואסו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 25 - מפלי איגואסו",
+                                                                     "fileCount":  254,
+                                                                     "bytes":  1129513325
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 26 - אסטרוס דל איברה",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 26 - אסטרוס דל איברה",
+                                                                     "fileCount":  64,
+                                                                     "bytes":  297429841
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 27 - אסטרוס דל איברה",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 27 - אסטרוס דל איברה",
+                                                                     "fileCount":  182,
+                                                                     "bytes":  922548730
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 28 - קוריינטס קוסטנרה",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 28 - קוריינטס קוסטנרה",
+                                                                     "fileCount":  22,
+                                                                     "bytes":  58175208
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 29 - קוריינטס קוסטנרה",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 29 - קוריינטס קוסטנרה",
+                                                                     "fileCount":  6,
+                                                                     "bytes":  14520567
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 30 - קוריינטס קוסטנרה",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 30 - קוריינטס קוסטנרה",
+                                                                     "fileCount":  4,
+                                                                     "bytes":  23887204
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 31 - בואנוס איירס לה בוקה - קמיניטו",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 31 - בואנוס איירס לה בוקה - קמיניטו",
+                                                                     "fileCount":  16,
+                                                                     "bytes":  29480136
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 5 - רוסאריו Costanera",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 5 - רוסאריו Costanera",
+                                                                     "fileCount":  52,
+                                                                     "bytes":  309060914
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 6 - רוסאריו Costanera",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 6 - רוסאריו Costanera",
+                                                                     "fileCount":  82,
+                                                                     "bytes":  215330029
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 7 - רוסאריו Costanera",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 7 - רוסאריו Costanera",
+                                                                     "fileCount":  89,
+                                                                     "bytes":  408905825
+                                                                 },
+                                                                 {
+                                                                     "name":  "יום 9 - וילה טראפול ושבעת האגמים",
+                                                                     "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina\\יום 9 - וילה טראפול ושבעת האגמים",
+                                                                     "fileCount":  14,
+                                                                     "bytes":  55845065
+                                                                 }
+                                                             ],
+                                                "bytes":  11861247291,
+                                                "originalPath":  "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina",
+                                                "fileCount":  2564,
+                                                "byExtension":  [
+                                                                    {
+                                                                        "extension":  ".heic",
+                                                                        "count":  305,
+                                                                        "bytes":  877611045
+                                                                    },
+                                                                    {
+                                                                        "extension":  ".jpeg",
+                                                                        "count":  8,
+                                                                        "bytes":  133087733
+                                                                    },
+                                                                    {
+                                                                        "extension":  ".jpg",
+                                                                        "count":  2245,
+                                                                        "bytes":  10569645452
+                                                                    },
+                                                                    {
+                                                                        "extension":  ".mp4",
+                                                                        "count":  6,
+                                                                        "bytes":  280903061
+                                                                    }
+                                                                ]
+                                            }
+                        }
+}
