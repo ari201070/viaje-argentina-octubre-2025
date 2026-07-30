@@ -1,85 +1,52 @@
 import cities from "./data/cities.json"
 
+const colors={
+blue:"#0B5ED7",
+light:"#F5F7FA",
+card:"#FFFFFF",
+text:"#1F2937"
+}
+
 export default function App(){
 
 return(
 
-<div style={{
-minHeight:"100vh",
-background:"#eef3f8",
-fontFamily:"Segoe UI,Arial,sans-serif"
-}}>
+<div style={{background:colors.light,minHeight:"100vh",fontFamily:"Segoe UI,Arial"}}>
 
 <header style={{
-background:"linear-gradient(135deg,#0057b8,#0099ff)",
+background:"linear-gradient(135deg,#0B5ED7,#38BDF8)",
 color:"white",
 padding:"60px 40px"
 }}>
 
-<div style={{
-maxWidth:"1300px",
-margin:"auto"
-}}>
+<div style={{maxWidth:"1400px",margin:"auto"}}>
 
-<h1 style={{
-fontSize:"48px",
-margin:0
-}}>
+<h1 style={{fontSize:56,margin:0}}>
 🇦🇷 Argentina
 </h1>
 
-<h2 style={{
-fontWeight:"400",
-marginTop:"10px"
-}}>
-Aventura Familiar · Octubre 2025
+<h2 style={{fontWeight:400}}>
+Aventura Familiar de 30 Días
 </h2>
 
-<div style={{
-display:"flex",
-gap:"15px",
-flexWrap:"wrap",
-marginTop:"35px"
-}}>
-
-<button>🏠 Inicio</button>
-<button>🗺 Itinerario</button>
-<button>📖 Diario</button>
-<button>📸 Fotos</button>
-<button>🥾 Wikiloc</button>
-<button>🌎 Mapa</button>
-
-</div>
+<p>
+28 Septiembre · 2 Noviembre 2025
+</p>
 
 </div>
 
 </header>
 
 <main style={{
-maxWidth:"1300px",
+maxWidth:"1400px",
 margin:"40px auto",
-display:"grid",
-gridTemplateColumns:"3fr 1fr",
-gap:"25px",
-padding:"0 20px"
+padding:"20px"
 }}>
-
-<section>
-
-<div style={{
-background:"white",
-borderRadius:"15px",
-padding:"25px",
-boxShadow:"0 5px 15px rgba(0,0,0,.08)"
-}}>
-
-<h2>🗺 Itinerario</h2>
 
 <div style={{
 display:"grid",
-gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",
-gap:"18px",
-marginTop:"25px"
+gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",
+gap:"25px"
 }}>
 
 {cities.map(city=>(
@@ -87,18 +54,41 @@ marginTop:"25px"
 <div
 key={city.id}
 style={{
-border:"1px solid #ddd",
-borderRadius:"12px",
-padding:"20px",
-background:"#fafafa"
+background:colors.card,
+borderRadius:"18px",
+overflow:"hidden",
+boxShadow:"0 8px 20px rgba(0,0,0,.12)"
 }}
 >
 
-<h3>{city.name}</h3>
+<div style={{
+height:"180px",
+background:"linear-gradient(135deg,#90CAF9,#1976D2)"
+}}>
 
-<p>{city.days||"Próximamente"}</p>
+</div>
 
-<button>Ver ciudad</button>
+<div style={{padding:"25px"}}>
+
+<h2>{city.name}</h2>
+
+<p><b>Fechas:</b> {city.days||"A definir"}</p>
+
+<div style={{
+display:"flex",
+gap:"10px",
+flexWrap:"wrap",
+marginTop:"20px"
+}}>
+
+<button>📍 Actividades</button>
+<button>🍴 Restaurantes</button>
+<button>🏨 Hotel</button>
+<button>🗺️ Mapa</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -106,67 +96,36 @@ background:"#fafafa"
 
 </div>
 
+<section style={{
+marginTop:"40px",
+background:"white",
+padding:"30px",
+borderRadius:"18px",
+boxShadow:"0 8px 20px rgba(0,0,0,.12)"
+}}>
+
+<h2>Roadmap</h2>
+
+<div style={{
+display:"grid",
+gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",
+gap:"20px"
+}}>
+
+<div>✅ Arquitectura</div>
+<div>🟡 OpenStreetMap</div>
+<div>🟡 Wikiloc</div>
+<div>🟡 Diario</div>
+<div>🟡 Fotos</div>
+<div>🟡 Presupuesto</div>
+<div>🟡 IA Local</div>
+<div>🟡 Offline</div>
+
 </div>
 
 </section>
 
-<aside>
-
-<div style={{
-background:"white",
-padding:"20px",
-borderRadius:"15px",
-marginBottom:"20px",
-boxShadow:"0 5px 15px rgba(0,0,0,.08)"
-}}>
-
-<h2>📊 Proyecto</h2>
-
-<p>Versión 0.1.0</p>
-<p>Sprint 3</p>
-<p>React + Vite</p>
-<p>OpenStreetMap</p>
-<p>GitHub Flow</p>
-
-</div>
-
-<div style={{
-background:"white",
-padding:"20px",
-borderRadius:"15px",
-boxShadow:"0 5px 15px rgba(0,0,0,.08)"
-}}>
-
-<h2>🚀 Próximos módulos</h2>
-
-<ul>
-
-<li>Timeline</li>
-<li>Mapa</li>
-<li>Galería</li>
-<li>Restaurantes</li>
-<li>Hoteles</li>
-<li>Actividades</li>
-<li>Presupuesto</li>
-<li>IA</li>
-
-</ul>
-
-</div>
-
-</aside>
-
 </main>
-
-<footer style={{
-textAlign:"center",
-padding:"35px",
-color:"#666"
-}}>
-
-Version 0.1.0 · Sprint 3
-
-</footer>
 
 </div>
 
