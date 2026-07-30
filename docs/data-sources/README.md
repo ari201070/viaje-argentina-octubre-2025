@@ -9,8 +9,8 @@ family trip project.
   `F:/Documentos_Viaje/2025/Octubre`.
 - `public/travel-references/`: loose reference screenshots and images from
   `F:/2025/Octubre/Viaje Familiar de 30 dias por Argentina`.
-- `legacy/photo_catalog.db`: imported placeholder from
-  `C:/Users/flier/GitHub/photo_catalog.db`. It was empty at import time.
+- `legacy/photo_catalog.db`: SQLite photo catalog imported from
+  `C:/Users/flier/.gemini/antigravity/scratch/photo_catalog.db`.
 - `src/data/sources/travelSources.json`: machine-readable inventory of the
   imported files and the larger external album.
 

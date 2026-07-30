@@ -48,9 +48,12 @@
                                    ],
                      "legacyDatabase":  {
                                             "repoPath":  "legacy/photo_catalog.db",
-                                            "originalPath":  "C:\\Users\\flier\\GitHub\\photo_catalog.db",
-                                            "bytes":  0,
-                                            "note":  "Empty SQLite/database placeholder at import time."
+                                            "originalPath":  "C:\\Users\\flier\\.gemini\\antigravity\\scratch\\photo_catalog.db",
+                                            "bytes":  37560320,
+                                            "sha256":  "F968B23D37A9F59DD2CF7FD7CC430A65F53C08E55DBBB27A5EF5D4B9F4099BD2",
+                                            "format":  "SQLite format 3",
+                                            "lastModified":  "2026-07-24T12:46:16+03:00",
+                                            "note":  "Photo catalog database provided from Gemini/Antigravity scratch; replaces the empty placeholder imported earlier."
                                         },
                      "references":  [
                                         {
