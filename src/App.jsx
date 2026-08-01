@@ -7,6 +7,7 @@ import BudgetDashboard from "./components/budget/BudgetDashboard";
 import ExpenseForm from "./components/budget/ExpenseForm";
 import ExpenseList from "./components/budget/ExpenseList";
 import BudgetBackup from "./components/budget/BudgetBackup";
+import DocumentDashboard from "./components/documents/DocumentDashboard";
 import useLocalStorage from "./hooks/useLocalStorage";
 
 const DEFAULT_BUDGET_CONFIG = {
@@ -73,16 +74,18 @@ export default function App() {
 
   return (
     <Layout>
-      {/* Navegación entre vistas */}
+      {/* Navigation */}
       <div
         style={{
           display: "flex",
           gap: "8px",
           marginBottom: "20px",
+          flexWrap: "wrap",
         }}
       >
-        {navButton("cities", "🏙️ Ciudades")}
-        {navButton("budget", "💰 Presupuesto")}
+        {navButton("cities", "Ciudades")}
+        {navButton("budget", "Presupuesto")}
+        {navButton("documents", "Vouchers")}
       </div>
 
       {view === "cities" && (
@@ -126,6 +129,8 @@ export default function App() {
           <ExpenseForm cities={cities} onAddExpense={handleAddExpense} />
         </div>
       )}
+
+      {view === "documents" && <DocumentDashboard cities={cities} />}
     </Layout>
   );
 }
