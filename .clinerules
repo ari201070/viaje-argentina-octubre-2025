@@ -1,0 +1,25 @@
+# Operational Rules for Cline
+
+## 1. API RATE LIMIT & COOLING
+
+- In case of 429 (Resource Exhausted) or 503 errors, automatically pause for 60 seconds before retrying.
+- Group file reads to minimize consecutive API calls.
+- Maintain a 2 to 3-second gap between autonomous actions to avoid saturating the Requests Per Minute (RPM) limit.
+
+### Automated Error Handling (429 / 503)
+
+- If an API response returns 429 (Resource Exhausted) or 503 (Service Unavailable):
+  1. Parse the error and identify if it is a daily quota issue or rate-limit peak.
+  2. Immediately instruct the user: "Se agotó la cuota o hubo un error con el modelo [modelo]. Por favor, selecciona un modelo alternativo en la configuración de OpenRouter o intenta nuevamente en unos momentos."
+  3. Pause operations until the user switches models or confirms retrying.
+
+## 2. TERMINAL SYNTAX (POWERSHELL)
+
+- This environment uses Windows PowerShell 5.1.
+- NEVER use the `&&` operator to chain commands. Use `;` or separate commands instead.
+
+## 3. REPOSITORY SECURITY
+
+- Keep changes small and iterative.
+- Do not modify or delete legacy files or backup databases.
+- Always confirm the active Git branch before editing code.

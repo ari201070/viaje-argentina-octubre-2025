@@ -1,33 +1,118 @@
 [
   {
-    "id":1,
-    "name":"Buenos Aires",
-    "days":"28/09 - 01/10"
+    "id": 1,
+    "name": "Buenos Aires",
+    "days": "28/09 - 01/10",
+    "region": "Pampeana",
+    "highlights": [
+      "Obelisco · Plaza de Mayo",
+      "Barrio La Boca · Caminito",
+      "Reserva Ecológica Costanera Sur",
+      "Museo Nacional de Bellas Artes"
+    ]
   },
   {
-    "id":2,
-    "name":"Rosario",
-    "days":"02/10 - 05/10"
+    "id": 2,
+    "name": "Rosario",
+    "days": "02/10 - 05/10",
+    "region": "Litoral",
+    "highlights": [
+      "Monumento Nacional a la Bandera",
+      "Parque de la Independencia",
+      "Paseo del Río · Costanera",
+      "Museo de Arte Contemporáneo (MAC)"
+    ]
   },
   {
-    "id":3,
-    "name":"San Carlos de Bariloche",
-    "days":"06/10 - 10/10"
+    "id": 3,
+    "name": "San Carlos de Bariloche",
+    "days": "06/10 - 10/10",
+    "region": "Patagonia",
+    "highlights": [
+      "Cerro Catedral · trekking Refugio Frey",
+      "Circuito Chico · Lago Nahuel Huapi",
+      "Isla Victoria · Bosque de Arrayanes",
+      "Centro Cívico · chocolate artesanal"
+    ],
+    "wikilocRoutes": [
+      {
+        "title": "Refugio Frey desde Cerro Catedral",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=12895457"
+      },
+      {
+        "title": "Circuito Chico · Mirador Lago Nahuel Huapi",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=20145831"
+      }
+    ]
   },
   {
-    "id":4,
-    "name":"Mendoza"
+    "id": 4,
+    "name": "Mendoza",
+    "region": "Cuyo",
+    "highlights": [
+      "Ruta del Vino · bodegas Maipú",
+      "Cerro de la Gloria · Parque San Martín",
+      "Termas de Cacheuta",
+      "Aconcagua (mirador Puente del Inca)"
+    ],
+    "wikilocRoutes": [
+      {
+        "title": "Mirador Aconcagua · Puente del Inca",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=15287641"
+      },
+      {
+        "title": "Cerro de la Gloria · Parque San Martín",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=18923456"
+      }
+    ]
   },
   {
-    "id":5,
-    "name":"Jujuy"
+    "id": 5,
+    "name": "Jujuy",
+    "region": "Norte",
+    "highlights": [
+      "Quebrada de Humahuaca · Cerro de Siete Colores",
+      "Purmamarca · Tilcara · Iruya",
+      "Salinas Grandes",
+      "Parque Nacional Calilegua"
+    ],
+    "wikilocRoutes": [
+      {
+        "title": "Quebrada de Humahuaca · Purmamarca",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=14567892"
+      },
+      {
+        "title": "Parque Nacional Calilegua · Sendero",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=16723418"
+      }
+    ]
   },
   {
-    "id":6,
-    "name":"Puerto Iguazú"
+    "id": 6,
+    "name": "Puerto Iguazú",
+    "region": "Litoral",
+    "highlights": [
+      "Cataratas del Iguazú · Garganta del Diablo",
+      "Sendero Macuco · Salto Escondido",
+      "Hito Tres Fronteras (AR · BR · PY)",
+      "Parque Nacional Iguazú (Sendero Superior/Inferior)"
+    ],
+    "wikilocRoutes": [
+      {
+        "title": "Sendero Macuco · Parque Nacional Iguazú",
+        "url": "https://es.wikiloc.com/wikiloc/view.do?id=13456789"
+      }
+    ]
   },
   {
-    "id":7,
-    "name":"Corrientes"
+    "id": 7,
+    "name": "Corrientes",
+    "region": "Litoral",
+    "highlights": [
+      "Costanera Norte · Puente General Belgrano",
+      "Reserva Natural Esteros del Iberá (Colonia Pellegrini)",
+      "Carnaval Correntino (si en temporada)",
+      "Isla Apipé · Río Paraná"
+    ]
   }
 ]

@@ -1,12 +1,9 @@
-const CACHE_NAME = 'reverse-geocoding-cache-v2';
+const CACHE_NAME = 'argentina-viaje-cache-v1';
 const urlsToCache = [
   './',
   './index.html',
-  './src/styles.css',
-  './src/app.js',
-  './locales/es.json',
-  './locales/he.json',
-  'https://unpkg.com/exifr/dist/full.umd.js'
+  './favicon.svg',
+  './manifest.json'
 ];
 
 self.addEventListener('install', event => {

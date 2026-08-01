@@ -1,134 +1,131 @@
-import cities from "./data/cities.json"
+import { useState } from "react";
+import cities from "./data/cities.json";
+import Layout from "./components/layout/Layout";
+import CityGrid from "./components/cities/CityGrid";
+import Roadmap from "./components/dashboard/Roadmap";
+import BudgetDashboard from "./components/budget/BudgetDashboard";
+import ExpenseForm from "./components/budget/ExpenseForm";
+import ExpenseList from "./components/budget/ExpenseList";
+import BudgetBackup from "./components/budget/BudgetBackup";
+import useLocalStorage from "./hooks/useLocalStorage";
 
-const colors={
-blue:"#0B5ED7",
-light:"#F5F7FA",
-card:"#FFFFFF",
-text:"#1F2937"
-}
+const DEFAULT_BUDGET_CONFIG = {
+  baseCurrency: "USD",
+  arsToUsd: 1000,
+  ilsToUsd: 3.7,
+};
 
-export default function App(){
+export default function App() {
+  const [notes, setNotes] = useLocalStorage("argentina-viaje-notes", {});
+  const [expenses, setExpenses] = useLocalStorage("vacation_expenses", []);
+  const [budgetConfig, setBudgetConfig] = useLocalStorage(
+    "vacation_budget_config",
+    DEFAULT_BUDGET_CONFIG
+  );
+  const [view, setView] = useState("cities");
 
-return(
+  const handleNoteChange = (cityId, note) => {
+    setNotes((prev) => {
+      const updated = { ...prev };
+      if (note && note.trim()) {
+        updated[cityId] = note.trim();
+      } else {
+        delete updated[cityId];
+      }
+      return updated;
+    });
+  };
 
-<div style={{background:colors.light,minHeight:"100vh",fontFamily:"Segoe UI,Arial"}}>
+  const handleAddExpense = (expense) => {
+    setExpenses((prev) => [...prev, expense]);
+  };
 
-<header style={{
-background:"linear-gradient(135deg,#0B5ED7,#38BDF8)",
-color:"white",
-padding:"60px 40px"
-}}>
+  const handleDeleteExpense = (id) => {
+    setExpenses((prev) => prev.filter((exp) => exp.id !== id));
+  };
 
-<div style={{maxWidth:"1400px",margin:"auto"}}>
+  const handleConfigChange = (newConfig) => {
+    setBudgetConfig(newConfig);
+  };
 
-<h1 style={{fontSize:56,margin:0}}>
-🇦🇷 Argentina
-</h1>
+  const handleImportData = (importedExpenses, importedConfig) => {
+    setExpenses(importedExpenses);
+    setBudgetConfig(importedConfig);
+  };
 
-<h2 style={{fontWeight:400}}>
-Aventura Familiar de 30 Días
-</h2>
+  const navButton = (key, label) => (
+    <button
+      onClick={() => setView(key)}
+      style={{
+        padding: "8px 16px",
+        background: view === key ? "#0B5ED7" : "white",
+        color: view === key ? "white" : "#374151",
+        border: "1px solid #D1D5DB",
+        borderRadius: "8px",
+        fontSize: "14px",
+        fontWeight: 600,
+        cursor: "pointer",
+      }}
+    >
+      {label}
+    </button>
+  );
 
-<p>
-28 Septiembre · 2 Noviembre 2025
-</p>
+  return (
+    <Layout>
+      {/* Navegación entre vistas */}
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          marginBottom: "20px",
+        }}
+      >
+        {navButton("cities", "🏙️ Ciudades")}
+        {navButton("budget", "💰 Presupuesto")}
+      </div>
 
-</div>
+      {view === "cities" && (
+        <>
+          <CityGrid
+            cities={cities}
+            notes={notes}
+            onNoteChange={handleNoteChange}
+          />
+          <Roadmap />
+        </>
+      )}
 
-</header>
-
-<main style={{
-maxWidth:"1400px",
-margin:"40px auto",
-padding:"20px"
-}}>
-
-<div style={{
-display:"grid",
-gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",
-gap:"25px"
-}}>
-
-{cities.map(city=>(
-
-<div
-key={city.id}
-style={{
-background:colors.card,
-borderRadius:"18px",
-overflow:"hidden",
-boxShadow:"0 8px 20px rgba(0,0,0,.12)"
-}}
->
-
-<div style={{
-height:"180px",
-background:"linear-gradient(135deg,#90CAF9,#1976D2)"
-}}>
-
-</div>
-
-<div style={{padding:"25px"}}>
-
-<h2>{city.name}</h2>
-
-<p><b>Fechas:</b> {city.days||"A definir"}</p>
-
-<div style={{
-display:"flex",
-gap:"10px",
-flexWrap:"wrap",
-marginTop:"20px"
-}}>
-
-<button>📍 Actividades</button>
-<button>🍴 Restaurantes</button>
-<button>🏨 Hotel</button>
-<button>🗺️ Mapa</button>
-
-</div>
-
-</div>
-
-</div>
-
-))}
-
-</div>
-
-<section style={{
-marginTop:"40px",
-background:"white",
-padding:"30px",
-borderRadius:"18px",
-boxShadow:"0 8px 20px rgba(0,0,0,.12)"
-}}>
-
-<h2>Roadmap</h2>
-
-<div style={{
-display:"grid",
-gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",
-gap:"20px"
-}}>
-
-<div>✅ Arquitectura</div>
-<div>🟡 OpenStreetMap</div>
-<div>🟡 Wikiloc</div>
-<div>🟡 Diario</div>
-<div>🟡 Fotos</div>
-<div>🟡 Presupuesto</div>
-<div>🟡 IA Local</div>
-<div>🟡 Offline</div>
-
-</div>
-
-</section>
-
-</main>
-
-</div>
-
-)
-
+      {view === "budget" && (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))",
+            gap: "20px",
+            alignItems: "start",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <BudgetDashboard
+              expenses={expenses}
+              config={budgetConfig}
+              onConfigChange={handleConfigChange}
+            />
+            <BudgetBackup
+              expenses={expenses}
+              config={budgetConfig}
+              cities={cities}
+              onImport={handleImportData}
+            />
+            <ExpenseList
+              expenses={expenses}
+              cities={cities}
+              onDeleteExpense={handleDeleteExpense}
+            />
+          </div>
+          <ExpenseForm cities={cities} onAddExpense={handleAddExpense} />
+        </div>
+      )}
+    </Layout>
+  );
 }

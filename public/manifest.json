@@ -1,19 +1,19 @@
 {
-  "name": "Reverse Geocoding",
-  "short_name": "RG Photos",
-  "description": "Extract EXIF and find POIs for your photos.",
+  "name": "Argentina · Aventura Familiar",
+  "short_name": "Argentina 2025",
+  "description": "Bitácora, itinerario y catálogo de fotos del viaje familiar por Argentina (Octubre 2025).",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#6366f1",
+  "background_color": "#F5F7FA",
+  "theme_color": "#0B5ED7",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%236366f1%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22>📍</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230b5ed7%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22>🗺️</text></svg>",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%236366f1%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22>📍</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230b5ed7%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22>🗺️</text></svg>",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }
