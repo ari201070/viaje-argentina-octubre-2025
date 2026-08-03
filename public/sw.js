@@ -62,7 +62,8 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   const isCDN = url.hostname.includes('unpkg.com') || url.hostname.includes('googleapis.com') || url.hostname.includes('gstatic.com');
   const isStaticAsset = urlsToCache.some(path => url.pathname.endsWith(path.replace('./', ''))) || 
-                        /\.(html|css|js|json|png|jpg|jpeg|gif|svg|woff2?|ttf|otf|ico)$/i.test(url.pathname);
+                        /\.(html|css|js|json|png|jpg|jpeg|gif|svg|webp|woff2?|ttf|otf|ico)$/i.test(url.pathname) ||
+                        url.pathname.includes('/gallery/');
 
   // Cache-First (stale-while-revalidate) strategy for static assets and CDNs
   if (isCDN || isStaticAsset) {

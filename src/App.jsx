@@ -8,6 +8,8 @@ import ExpenseForm from "./components/budget/ExpenseForm";
 import ExpenseList from "./components/budget/ExpenseList";
 import BudgetBackup from "./components/budget/BudgetBackup";
 import DocumentDashboard from "./components/documents/DocumentDashboard";
+import GalleryDashboard from "./components/gallery/GalleryDashboard";
+import galleryPhotos from "./data/gallery.json";
 import useLocalStorage from "./hooks/useLocalStorage";
 
 const DEFAULT_BUDGET_CONFIG = {
@@ -86,6 +88,7 @@ export default function App() {
         {navButton("cities", "Ciudades")}
         {navButton("budget", "Presupuesto")}
         {navButton("documents", "Vouchers")}
+        {navButton("gallery", "Galeria")}
       </div>
 
       {view === "cities" && (
@@ -131,6 +134,8 @@ export default function App() {
       )}
 
       {view === "documents" && <DocumentDashboard cities={cities} />}
+
+      {view === "gallery" && <GalleryDashboard photos={galleryPhotos} />}
     </Layout>
   );
 }
