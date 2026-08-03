@@ -1,6 +1,7 @@
-import { readdir, mkdir, writeFile, stat } from "node:fs/promises";
+import { readdir, mkdir, writeFile, stat, readFile } from "node:fs/promises";
 import { join, extname, parse } from "node:path";
 import process from "node:process";
+import heicConvert from "heic-convert";
 import sharp from "sharp";
 
 // ─── Configuración ────────────────────────────────────────────────────────────
@@ -74,6 +75,7 @@ async function processFolder(folderName, cityId, gallery) {
   console.log(`\n📁 ${folderName} → cityId ${cityId} (${images.length} imágenes)`);
 
   let processed = 0;
+  let skipped = 0;
   for (const file of images) {
     const srcPath = join(folderPath, file);
     const base = parse(file).name;
@@ -84,18 +86,62 @@ async function processFolder(folderName, cityId, gallery) {
     const fullPath = join(outDir, outName);
     const thumbPath = join(thumbsDir, thumbName);
 
+    // ── Omitir si el WebP ya existe (ambos versión y thumbnail) ──
+    try {
+      const [existingFull, existingThumb] = [await stat(fullPath), await stat(thumbPath)];
+      const srcStats = await stat(srcPath);
+      gallery.push({
+        id: `${cityId}-${slug}`,
+        cityId,
+        folder: folderName,
+        filename: outName,
+        src: `/gallery/${cityId}/${outName}`,
+        thumb: `/gallery/${cityId}/thumbs/${thumbName}`,
+        original: file,
+        originalSize: srcStats.size,
+        size: existingFull.size,
+        thumbSize: existingThumb.size,
+        width: MAX_WIDTH_FULL,
+        height: null,
+        date: null,
+      });
+      skipped++;
+      continue;
+    } catch {
+      // No existe → procesar
+    }
+
     try {
       const srcStats = await stat(srcPath);
+      const isHeic = extname(file).toLowerCase() === ".heic";
+
+      // ── HEIC: convertir a JPEG con heic-convert (fallback si sharp falla) ──
+      let imageBuffer = null;
+      if (isHeic) {
+        try {
+          const heicInput = await readFile(srcPath);
+          const converted = await heicConvert({
+            buffer: heicInput,
+            format: "JPEG",
+            quality: 1,
+          });
+          imageBuffer = converted;
+        } catch (heicErr) {
+          console.warn(`  ⚠️ heic-convert falló para ${file}, probando sharp directo: ${heicErr.message}`);
+        }
+      }
+
+      const source = imageBuffer || srcPath;
 
       // Imagen completa (máx 1920px, calidad 80%)
-      await sharp(srcPath, { failOn: "none" })
+      await sharp(source, { failOn: "none" })
         .rotate()
         .resize({ width: MAX_WIDTH_FULL, withoutEnlargement: true })
         .webp({ quality: QUALITY_FULL })
         .toFile(fullPath);
 
       // Miniatura (máx 400px, calidad 70%)
-      await sharp(srcPath, { failOn: "none" })
+      await sharp(source, { failOn: "none" })
         .rotate()
         .resize({ width: MAX_WIDTH_THUMB, withoutEnlargement: true })
         .webp({ quality: QUALITY_THUMB })
@@ -126,7 +172,7 @@ async function processFolder(folderName, cityId, gallery) {
     }
   }
 
-  console.log(`  ✅ ${processed}/${images.length} procesadas`);
+  console.log(`  ✅ ${processed} nuevas, ${skipped} omitidas (ya existían)`);
   return processed;
 }
 
