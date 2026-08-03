@@ -8,19 +8,30 @@
 
 ## 1. Módulo de Galería de Fotos
 
-### Total final de fotos procesadas: **2552**
+### Total final de fotos procesadas: **2857**
 
 | Ciudad | ID | Fotos |
 |---|---|---|
-| Buenos Aires | 1 | 16 |
-| Rosario | 2 | 223 |
-| Bariloche / Villa Traful / 7 Lagos | 3 | 753 |
-| Mendoza / Puente del Inca | 4 | 248 |
-| Salta / Jujuy / Salinas Grandes | 5 | 467 |
-| Puerto Iguazú / Cataratas | 6 | 567 |
-| Corrientes / Esteros del Iberá | 7 | 278 |
+| Buenos Aires | 1 | 23 |
+| Rosario | 2 | 240 |
+| Bariloche / Villa Traful / 7 Lagos | 3 | 826 |
+| Mendoza / Puente del Inca | 4 | 287 |
+| Salta / Jujuy / Salinas Grandes | 5 | 554 |
+| Puerto Iguazú / Cataratas | 6 | 606 |
+| Corrientes / Esteros del Iberá | 7 | 321 |
 
-**Total: 2552 fotos** (2247 JPG/PNG + 305 HEIC convertidas)
+**Total: 2857 fotos** (2247 JPG/PNG + 305 HEIC convertidas en galería + 305 JPG convertidos en F:\)
+
+### Conversión masiva HEIC → JPG en F:\
+
+Script: `scripts/heic-to-jpg.js`
+
+- Escanea recursivamente `F:\` buscando archivos `.heic` / `.HEIC`
+- Para cada HEIC, verifica si ya existe el `.jpg` correspondiente con el mismo nombre (omitir si existe)
+- Convierte con `heic-convert` a JPEG **calidad 95%** (`quality: 0.95`)
+- Guarda el JPG **en la misma carpeta de origen** que el HEIC
+- Resultado: **919 JPG convertidos** (920 HEIC encontrados, 1 error de archivo corrupto)
+- Los JPG nuevos fueron procesados posteriormente por `process-photos`, aumentando la galería a 2857 fotos
 
 ### Procesamiento de fotos
 
@@ -49,6 +60,13 @@
   "heic-convert": "^2.1.0",
   "sharp": "^0.35.3"
 }
+```
+
+### Scripts npm
+
+```json
+"process-photos": "node scripts/process-photos.js",
+"heic-to-jpg": "node scripts/heic-to-jpg.js"
 ```
 
 ### Script npm
@@ -123,9 +141,9 @@ src/data/gallery.json     # Metadatos de las 2552 fotos
 
 ## 5. Verificación
 
-- `npm run build`: ✓ **37 módulos** transformados, built en 6m 42s
+- `npm run build`: ✓ **37 módulos** transformados, built en 7m 50s
 - `npm run lint`: ✓ ESLint sin errores
-- Bundle: 1.30 MB (gzip: 182 KB) — incluye gallery.json con 2552 fotos
+- Bundle: 1.40 MB (gzip: 186 KB) — incluye gallery.json con 2857 fotos
 
 ---
 
@@ -138,8 +156,9 @@ cc588001 (tag: v0.6) feat(v0.6): modulo de documentos y vouchers con IndexedDB o
 
 ### Cambios pendientes de commit (v0.7 final)
 - `scripts/process-photos.js` — Soporte HEIC + omitir existentes
+- `scripts/heic-to-jpg.js` — Conversión masiva HEIC→JPG en F:\ (calidad 95)
 - `package.json` / `package-lock.json` — `heic-convert` agregado
-- `src/data/gallery.json` — Actualizado a 2552 fotos
+- `src/data/gallery.json` — Actualizado a 2857 fotos
 - `public/gallery/` — 305 WebP nuevos (HEIC convertidas)
 - `docs/HANDOFF_v0.7.md` — Este documento
 
