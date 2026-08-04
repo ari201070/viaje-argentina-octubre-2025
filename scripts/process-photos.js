@@ -1,8 +1,13 @@
 import { readdir, mkdir, writeFile, stat, readFile } from "node:fs/promises";
 import { join, extname, parse } from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import process from "node:process";
 import heicConvert from "heic-convert";
 import sharp from "sharp";
+
+const execFileAsync = promisify(execFile);
+const EXIFTOOL = "C:\\Users\\flier\\AppData\\Local\\Programs\\ExifTool\\ExifTool.exe";
 
 // ─── Configuración ────────────────────────────────────────────────────────────
 const SOURCE_ROOT = "F:\\2025\\Octubre\\Viaje Familiar de 30 dias por Argentina";
@@ -61,7 +66,7 @@ function formatBytes(bytes) {
 }
 
 // ─── Procesamiento ────────────────────────────────────────────────────────────
-async function processFolder(folderName, cityId, gallery) {
+async function processFolder(folderName, cityId, gallery, dateMap) {
   const folderPath = join(SOURCE_ROOT, folderName);
   const outDir = join(OUTPUT_ROOT, String(cityId));
   const thumbsDir = join(outDir, "thumbs");
@@ -90,6 +95,7 @@ async function processFolder(folderName, cityId, gallery) {
     try {
       const [existingFull, existingThumb] = [await stat(fullPath), await stat(thumbPath)];
       const srcStats = await stat(srcPath);
+      const exifDate = dateMap.get(srcPath) || null;
       gallery.push({
         id: `${cityId}-${slug}`,
         cityId,
@@ -103,7 +109,7 @@ async function processFolder(folderName, cityId, gallery) {
         thumbSize: existingThumb.size,
         width: MAX_WIDTH_FULL,
         height: null,
-        date: null,
+        date: exifDate,
       });
       skipped++;
       continue;
@@ -149,6 +155,7 @@ async function processFolder(folderName, cityId, gallery) {
 
       const fullStats = await stat(fullPath);
       const thumbStats = await stat(thumbPath);
+      const exifDate = dateMap.get(srcPath) || null;
 
       gallery.push({
         id: `${cityId}-${slug}`,
@@ -163,7 +170,7 @@ async function processFolder(folderName, cityId, gallery) {
         thumbSize: thumbStats.size,
         width: MAX_WIDTH_FULL,
         height: null,
-        date: null,
+        date: exifDate,
       });
 
       processed++;
@@ -177,10 +184,39 @@ async function processFolder(folderName, cityId, gallery) {
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
+async function loadExifDates() {
+  console.log("📅 Leyendo fechas EXIF con exiftool...");
+  const dateMap = new Map();
+  try {
+    const { stdout } = await execFileAsync(EXIFTOOL, [
+      "-r",
+      "-p", "$FilePath\t$DateTimeOriginal",
+      "-ext", "jpg",
+      "-ext", "jpeg",
+      "-ext", "png",
+      "-ext", "heic",
+      SOURCE_ROOT,
+    ]);
+    for (const line of stdout.split("\n")) {
+      const [filePath, date] = line.trim().split("\t");
+      if (filePath && date) {
+        // Normalizar ruta: exiftool usa "/" en Windows, Node usa "\"
+        const normalized = filePath.replace(/\//g, "\\");
+        dateMap.set(normalized, date);
+      }
+    }
+    console.log(`  ✅ Fechas cargadas: ${dateMap.size}`);
+  } catch (err) {
+    console.warn(`  ⚠️ Error leyendo EXIF: ${err.message}`);
+  }
+  return dateMap;
+}
+
 async function main() {
   console.log("🖼️  Procesando fotos del viaje...");
   console.log(`📂 Origen: ${SOURCE_ROOT}`);
   console.log(`📂 Destino: ${OUTPUT_ROOT}`);
+  const dateMap = await loadExifDates();
 
   const folders = await readdir(SOURCE_ROOT, { withFileTypes: true });
   const gallery = [];
@@ -195,7 +231,7 @@ async function main() {
       continue;
     }
 
-    total += await processFolder(entry.name, cityId, gallery);
+    total += await processFolder(entry.name, cityId, gallery, dateMap);
   }
 
   // Ordenar por cityId y nombre
