@@ -9,6 +9,7 @@ import ExpenseList from "./components/budget/ExpenseList";
 import BudgetBackup from "./components/budget/BudgetBackup";
 import DocumentDashboard from "./components/documents/DocumentDashboard";
 import GalleryDashboard from "./components/gallery/GalleryDashboard";
+import InteractiveMap from "./components/map/InteractiveMap";
 import galleryPhotos from "./data/gallery.json";
 import useLocalStorage from "./hooks/useLocalStorage";
 
@@ -86,6 +87,7 @@ export default function App() {
         }}
       >
         {navButton("cities", "Ciudades")}
+        {navButton("map", "Mapa")}
         {navButton("budget", "Presupuesto")}
         {navButton("documents", "Vouchers")}
         {navButton("gallery", "Galeria")}
@@ -136,6 +138,8 @@ export default function App() {
       {view === "documents" && <DocumentDashboard cities={cities} />}
 
       {view === "gallery" && <GalleryDashboard photos={galleryPhotos} />}
+
+      {view === "map" && <InteractiveMap />}
     </Layout>
   );
 }
