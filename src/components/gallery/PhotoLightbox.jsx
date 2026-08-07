@@ -140,6 +140,27 @@ export default function PhotoLightbox({
           <p style={{ margin: 0, fontWeight: 600 }}>
             📍 {cityName(photo.cityId)}
           </p>
+          {photo.matchedEvent && (
+            <p
+              style={{
+                margin: "6px 0 0",
+                fontSize: "12px",
+                background: "rgba(16,185,129,0.25)",
+                border: "1px solid rgba(16,185,129,0.5)",
+                color: "#6EE7B7",
+                padding: "6px 12px",
+                borderRadius: "999px",
+                display: "inline-block",
+              }}
+            >
+              🎯 {photo.matchedEvent.name}
+              {photo.lat !== undefined && photo.lng !== undefined && (
+                <span style={{ opacity: 0.8, marginLeft: "6px", fontFamily: "monospace" }}>
+                  · {photo.lat.toFixed(4)}, {photo.lng.toFixed(4)}
+                </span>
+              )}
+            </p>
+          )}
           <p style={{ margin: "4px 0 0", opacity: 0.7, fontSize: "12px" }}>
             {index + 1} / {photos.length} · {photo.filename}
           </p>

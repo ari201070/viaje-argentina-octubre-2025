@@ -7,7 +7,7 @@ import BudgetDashboard from "./components/budget/BudgetDashboard";
 import ExpenseForm from "./components/budget/ExpenseForm";
 import ExpenseList from "./components/budget/ExpenseList";
 import BudgetBackup from "./components/budget/BudgetBackup";
-import DocumentDashboard from "./components/documents/DocumentDashboard";
+import VoucherDashboard from "./components/vouchers/VoucherDashboard";
 import InteractiveMap from "./components/map/InteractiveMap";
 import useLocalStorage from "./hooks/useLocalStorage";
 
@@ -135,7 +135,7 @@ export default function App() {
         </div>
       )}
 
-      {view === "documents" && <DocumentDashboard cities={cities} />}
+      {view === "documents" && <VoucherDashboard />}
 
       {view === "gallery" && (
         <Suspense

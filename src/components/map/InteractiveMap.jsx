@@ -1,9 +1,12 @@
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import itinerary from "../../data/itinerary.json";
+import cities from "../../data/cities.json";
+import { enrichPhotosWithGeo } from "../../services/photoGeoService";
 
-// Ícono personalizado para los marcadores
+// Ícono personalizado para los marcadores de región
 const customIcon = new L.Icon({
   iconUrl:
     "data:image/svg+xml;base64," +
@@ -13,6 +16,18 @@ const customIcon = new L.Icon({
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
+});
+
+// Ícono para fotos geolocalizadas
+const photoIcon = new L.Icon({
+  iconUrl:
+    "data:image/svg+xml;base64," +
+    btoa(
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><circle cx="12" cy="12" r="11" fill="#10B981" stroke="white" stroke-width="2"/><path fill="white" d="M12 7.5c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 9.5 12 9.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
+    ),
+  iconSize: [28, 28],
+  iconAnchor: [14, 28],
+  popupAnchor: [0, -28],
 });
 
 // Regiones con coordenadas centrales
@@ -27,6 +42,27 @@ const REGION_COORDS = {
 };
 
 export default function InteractiveMap() {
+  const [geoPhotos, setGeoPhotos] = useState([]);
+
+  // Cargar galería y enriquecer con geolocalización temporal (vouchers/itinerario).
+  useEffect(() => {
+    let cancelled = false;
+    import("../../data/gallery.json")
+      .then((mod) => {
+        if (cancelled) return;
+        const raw = mod.default || mod;
+        const enriched = enrichPhotosWithGeo(raw);
+        // Solo fotos con coordenadas resolubles.
+        setGeoPhotos(enriched.filter((p) => p.lat !== undefined && p.lng !== undefined));
+      })
+      .catch((err) => {
+        console.error("Mapa: Error al cargar fotos para geolocalizar:", err);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Centro de Argentina
   const center = [-34.6037, -64.0];
   const zoom = 4;
@@ -58,6 +94,37 @@ export default function InteractiveMap() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
+          {/* Marcadores de fotos geolocalizadas */}
+          {geoPhotos.map((photo) => {
+            const city = cities.find((c) => c.id === photo.cityId);
+            return (
+              <Marker
+                key={photo.id}
+                position={[photo.lat, photo.lng]}
+                icon={photoIcon}
+              >
+                <Popup>
+                  <div style={{ minWidth: "180px", textAlign: "center" }}>
+                    <img
+                      src={photo.thumb}
+                      alt={photo.filename}
+                      style={{ width: "100%", maxHeight: "120px", objectFit: "cover", borderRadius: "8px", marginBottom: "6px" }}
+                    />
+                    <strong style={{ fontSize: "13px" }}>🖼️ {city ? city.name : ""}</strong>
+                    {photo.matchedEvent && (
+                      <p style={{ margin: "4px 0 0", fontSize: "11px", color: "#059669", fontWeight: 700 }}>
+                        🎯 {photo.matchedEvent.name}
+                      </p>
+                    )}
+                    <p style={{ margin: "4px 0 0", fontSize: "10px", color: "#9CA3AF", fontFamily: "monospace" }}>
+                      {photo.lat.toFixed(4)}, {photo.lng.toFixed(4)}
+                    </p>
+                  </div>
+                </Popup>
+              </Marker>
+            );
+          })}
 
           {/* Marcadores de regiones */}
           {Object.entries(REGION_COORDS).map(([id, region]) => {
