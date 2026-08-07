@@ -37,11 +37,11 @@
     "wikilocRoutes": [
       {
         "title": "Refugio Frey desde Cerro Catedral",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Refugio+Frey+desde+Cerro+Catedral"
+        "url": "https://www.openstreetmap.org/search?query=Refugio%20Frey%20desde%20Cerro%20Catedral%20Argentina"
       },
       {
         "title": "Circuito Chico · Mirador Lago Nahuel Huapi",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Circuito+Chico+Mirador+Lago+Nahuel+Huapi"
+        "url": "https://www.openstreetmap.org/search?query=Circuito%20Chico%20Mirador%20Lago%20Nahuel%20Huapi%20Argentina"
       }
     ]
   },
@@ -58,11 +58,11 @@
     "wikilocRoutes": [
       {
         "title": "Mirador Aconcagua · Puente del Inca",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Mirador+Aconcagua+Puente+del+Inca"
+        "url": "https://www.openstreetmap.org/search?query=Mirador%20Aconcagua%20Puente%20del%20Inca%20Argentina"
       },
       {
         "title": "Cerro de la Gloria · Parque San Martín",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Cerro+de+la+Gloria+Parque+San+Mart%C3%ADn"
+        "url": "https://www.openstreetmap.org/search?query=Cerro%20de%20la%20Gloria%20Parque%20San%20Mart%C3%ADn%20Argentina"
       }
     ]
   },
@@ -79,11 +79,11 @@
     "wikilocRoutes": [
       {
         "title": "Quebrada de Humahuaca · Purmamarca",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Quebrada+de+Humahuaca+Purmamarca"
+        "url": "https://www.openstreetmap.org/search?query=Quebrada%20de%20Humahuaca%20Purmamarca%20Argentina"
       },
       {
         "title": "Parque Nacional Calilegua · Sendero",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Parque+Nacional+Calilegua+Sendero"
+        "url": "https://www.openstreetmap.org/search?query=Parque%20Nacional%20Calilegua%20Sendero%20Argentina"
       }
     ]
   },
@@ -100,7 +100,7 @@
     "wikilocRoutes": [
       {
         "title": "Sendero Macuco · Parque Nacional Iguazú",
-        "url": "https://es.wikiloc.com/wikiloc/map.do?q=Sendero+Macuco+Parque+Nacional+Iguaz%C3%BA"
+        "url": "https://www.openstreetmap.org/search?query=Sendero%20Macuco%20Parque%20Nacional%20Iguaz%C3%BA%20Argentina"
       }
     ]
   },
