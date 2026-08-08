@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import VoucherForm from "./VoucherForm";
 import VoucherList from "./VoucherList";
 import VoucherViewer from "./VoucherViewer";
@@ -29,29 +29,23 @@ const CATEGORIES = [
  * garantizando compatibilidad directa con `photoGeoService.ts`.
  */
 export default function VoucherDashboard() {
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [viewBooking, setViewBooking] = useState(null);
-  const [editingBooking, setEditingBooking] = useState(null);
-  const [notification, setNotification] = useState(null);
-
-  // Cargar vouchers desde localStorage
-  useEffect(() => {
+  // Cargar vouchers desde localStorage de forma síncrona (inicialización perezosa).
+  const [bookings, setBookings] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          setBookings(parsed);
-        }
+        if (Array.isArray(parsed)) return parsed;
       }
     } catch (e) {
       console.error("VoucherDashboard: Error al leer travel_bookings:", e);
-    } finally {
-      setLoading(false);
     }
-  }, []);
+    return [];
+  });
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [viewBooking, setViewBooking] = useState(null);
+  const [editingBooking, setEditingBooking] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   // Persistir cada cambio
   const persist = useCallback((next) => {
@@ -162,11 +156,9 @@ export default function VoucherDashboard() {
           🎫 Vouchers y Reservas
         </h2>
         <p style={{ margin: 0, fontSize: "14px", opacity: 0.9 }}>
-          {loading
-            ? "Cargando vouchers..."
-            : `Total: ${parsedBookings.length} voucher${
-                parsedBookings.length !== 1 ? "es" : ""
-              }`}
+          {`Total: ${parsedBookings.length} voucher${
+            parsedBookings.length !== 1 ? "es" : ""
+          }`}
         </p>
       </div>
 
