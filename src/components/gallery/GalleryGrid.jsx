@@ -73,6 +73,28 @@ export default function GalleryGrid({ photos, cityName, onPhotoClick }) {
           >
             📍 {cityName(photo.cityId)}
           </span>
+          {photo.matchedEvent && (
+            <span
+              style={{
+                position: "absolute",
+                top: 6,
+                left: 6,
+                padding: "3px 8px",
+                background: "rgba(16,185,129,0.9)",
+                color: "white",
+                fontSize: "10px",
+                fontWeight: 700,
+                borderRadius: "999px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "90%",
+              }}
+              title={`Coordenadas inferidas: ${photo.lat?.toFixed(4)}, ${photo.lng?.toFixed(4)} — ${photo.matchedEvent.name}`}
+            >
+              🎯 {photo.matchedEvent.name}
+            </span>
+          )}
         </button>
       ))}
     </div>

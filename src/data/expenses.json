@@ -1,0 +1,52 @@
+[
+  {
+    "id": "exp-1",
+    "description": "Vuelos Internacionales / Cabotaje",
+    "amount": 1800,
+    "currency": "USD",
+    "category": "Vuelos",
+    "city": "� Sin asignar �",
+    "date": "2025-09-28",
+    "notes": "Cargado autom?ticamente desde reservas"
+  },
+  {
+    "id": "exp-2",
+    "description": "Alojamiento Bariloche / Patagonia",
+    "amount": 950,
+    "currency": "USD",
+    "category": "Alojamiento",
+    "city": "Bariloche",
+    "date": "2025-10-02",
+    "notes": "Reserva de hotel / departamento"
+  },
+  {
+    "id": "exp-3",
+    "description": "Excursiones y Pases Parques Nacionales",
+    "amount": 350000,
+    "currency": "ARS",
+    "category": "Actividades",
+    "city": "Bariloche",
+    "date": "2025-10-05",
+    "notes": "Pases y guiadas"
+  },
+  {
+    "id": "exp-4",
+    "description": "Alojamiento Mendoza / Cuyo",
+    "amount": 720,
+    "currency": "USD",
+    "category": "Alojamiento",
+    "city": "Mendoza",
+    "date": "2025-10-12",
+    "notes": "Reserva bodega / alojamiento"
+  },
+  {
+    "id": "exp-5",
+    "description": "Tours Bodegas y Gastronom?a",
+    "amount": 280000,
+    "currency": "ARS",
+    "category": "Gastronom?a",
+    "city": "Mendoza",
+    "date": "2025-10-15",
+    "notes": "Degustaciones y almuerzos"
+  }
+]

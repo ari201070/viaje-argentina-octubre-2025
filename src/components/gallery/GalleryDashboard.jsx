@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cities from "../../data/cities.json";
 import GalleryGrid from "./GalleryGrid";
 import PhotoLightbox from "./PhotoLightbox";
+import PhotoAIAnalyzer from "../ai/PhotoAIAnalyzer";
+import { enrichPhotosWithGeo } from "../../services/photoGeoService";
 
 const cardStyle = {
   background: "#FFFFFF",
@@ -10,9 +12,44 @@ const cardStyle = {
   boxShadow: "0 4px 12px rgba(0,0,0,.08)",
 };
 
-export default function GalleryDashboard({ photos }) {
+export default function GalleryDashboard() {
+  const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [filterCity, setFilterCity] = useState("");
   const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  useEffect(() => {
+    import("../../data/gallery.json")
+      .then((mod) => {
+        const raw = mod.default || mod;
+        // Enriquecer fotos con geolocalización temporal (vouchers/itinerario).
+        const enriched = enrichPhotosWithGeo(raw);
+        setPhotos(enriched);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error al cargar fotos de la galería:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "200px",
+          ...cardStyle,
+        }}
+      >
+        <p style={{ margin: 0, fontSize: "16px", color: "#4B5563" }}>
+          🖼️ Cargando fotos de la galería...
+        </p>
+      </div>
+    );
+  }
 
   const filtered = filterCity
     ? photos.filter((p) => p.cityId === parseInt(filterCity))
@@ -90,6 +127,9 @@ export default function GalleryDashboard({ photos }) {
           </div>
         </div>
       </div>
+
+      {/* Análisis visual con IA */}
+      <PhotoAIAnalyzer />
 
       {/* Grid de fotos */}
       <GalleryGrid

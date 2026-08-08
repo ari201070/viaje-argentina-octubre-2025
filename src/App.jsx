@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import cities from "./data/cities.json";
 import Layout from "./components/layout/Layout";
 import CityGrid from "./components/cities/CityGrid";
@@ -7,10 +7,11 @@ import BudgetDashboard from "./components/budget/BudgetDashboard";
 import ExpenseForm from "./components/budget/ExpenseForm";
 import ExpenseList from "./components/budget/ExpenseList";
 import BudgetBackup from "./components/budget/BudgetBackup";
-import DocumentDashboard from "./components/documents/DocumentDashboard";
-import GalleryDashboard from "./components/gallery/GalleryDashboard";
-import galleryPhotos from "./data/gallery.json";
+import VoucherDashboard from "./components/vouchers/VoucherDashboard";
+import InteractiveMap from "./components/map/InteractiveMap";
 import useLocalStorage from "./hooks/useLocalStorage";
+
+const GalleryDashboard = lazy(() => import("./components/gallery/GalleryDashboard"));
 
 const DEFAULT_BUDGET_CONFIG = {
   baseCurrency: "USD",
@@ -86,6 +87,7 @@ export default function App() {
         }}
       >
         {navButton("cities", "Ciudades")}
+        {navButton("map", "Mapa")}
         {navButton("budget", "Presupuesto")}
         {navButton("documents", "Vouchers")}
         {navButton("gallery", "Galeria")}
@@ -133,9 +135,34 @@ export default function App() {
         </div>
       )}
 
-      {view === "documents" && <DocumentDashboard cities={cities} />}
+      {view === "documents" && <VoucherDashboard />}
 
-      {view === "gallery" && <GalleryDashboard photos={galleryPhotos} />}
+      {view === "gallery" && (
+        <Suspense
+          fallback={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "200px",
+                background: "#FFFFFF",
+                padding: "20px",
+                borderRadius: "14px",
+                boxShadow: "0 4px 12px rgba(0,0,0,.08)",
+              }}
+            >
+              <p style={{ margin: 0, fontSize: "16px", color: "#4B5563" }}>
+                🖼️ Cargando módulo de galería...
+              </p>
+            </div>
+          }
+        >
+          <GalleryDashboard />
+        </Suspense>
+      )}
+
+      {view === "map" && <InteractiveMap />}
     </Layout>
   );
 }

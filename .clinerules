@@ -1,25 +1,31 @@
 # Operational Rules for Cline
 
-## 1. API RATE LIMIT & COOLING
+## 1. API RATE LIMIT & COOLING & ERROR HANDLING
 
-- In case of 429 (Resource Exhausted) or 503 errors, automatically pause for 60 seconds before retrying.
-- Group file reads to minimize consecutive API calls.
-- Maintain a 2 to 3-second gap between autonomous actions to avoid saturating the Requests Per Minute (RPM) limit.
+- In case of 429 (Resource Exhausted) or 503 (Service Unavailable) errors, DO NOT engage in aggressive or infinite retry loops[cite: 1].
+- Group file reads to minimize consecutive API calls[cite: 1].
+- Maintain a 2 to 3-second gap between autonomous actions to avoid saturating the Requests Per Minute (RPM) limit[cite: 1].
 
 ### Automated Error Handling (429 / 503)
 
-- If an API response returns 429 (Resource Exhausted) or 503 (Service Unavailable):
-  1. Parse the error and identify if it is a daily quota issue or rate-limit peak.
-  2. Immediately instruct the user: "Se agotó la cuota o hubo un error con el modelo [modelo]. Por favor, selecciona un modelo alternativo en la configuración de OpenRouter o intenta nuevamente en unos momentos."
-  3. Pause operations until the user switches models or confirms retrying.
+- If an API response returns 429 or 503:
+  1. Stop execution immediately after a maximum of 1 retry attempt. Do NOT lock the user interface with auto-retry loops.
+  2. Prompt the user clearly: "Se detectó saturación o indisponibilidad en el modelo actual (Error 503/429). Por favor, cambia temporalmente el modelo en la configuración de Cline o reintenta en unos instantes."[cite: 1]
+  3. Pause operations until the user changes the model or confirms retrying[cite: 1].
 
-## 2. TERMINAL SYNTAX (POWERSHELL)
+## 2. MODULAR EXECUTION & ATOMIC SCOPE
 
-- This environment uses Windows PowerShell 5.1.
-- NEVER use the `&&` operator to chain commands. Use `;` or separate commands instead.
+- **Single Task Focus:** Execute changes in small, atomic steps. Never attempt multi-repository consolidations or large structural refactors in a single pass.
+- **Incremental Progress:** Modify or migrate ONE module/file at a time, verify that it compiles without errors, and await user confirmation before proceeding to the next task.
 
-## 3. REPOSITORY SECURITY
+## 3. TERMINAL SYNTAX (POWERSHELL)
 
-- Keep changes small and iterative.
-- Do not modify or delete legacy files or backup databases.
-- Always confirm the active Git branch before editing code.
+- This environment uses Windows PowerShell 5.1[cite: 1].
+- NEVER use the `&&` operator to chain commands. Use `;` or separate commands instead[cite: 1].
+
+## 4. REPOSITORY SECURITY & FROZEN FILES
+
+- **PROTECTED FILES:** DO NOT modify `src/data/cities.json` or edit map/route URLs under any circumstances unless explicitly commanded in the immediate prompt.
+- Keep changes small, clean, and iterative[cite: 1].
+- Do not modify or delete legacy files or backup databases[cite: 1].
+- Always confirm the active Git branch before editing code[cite: 1].
