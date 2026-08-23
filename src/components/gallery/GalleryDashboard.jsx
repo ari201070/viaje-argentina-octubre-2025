@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import cities from "../../data/cities.json";
 import GalleryGrid from "./GalleryGrid";
 import PhotoLightbox from "./PhotoLightbox";
-import PhotoAIAnalyzer from "../ai/PhotoAIAnalyzer";
-import { enrichPhotosWithGeo } from "../../services/photoGeoService";
+import { enrichPhotosWithGeoAsync } from "../../services/photoGeoService";
 
 const cardStyle = {
   background: "#FFFFFF",
@@ -20,11 +19,18 @@ export default function GalleryDashboard() {
 
   useEffect(() => {
     import("../../data/gallery.json")
-      .then((mod) => {
+      .then(async (mod) => {
         const raw = mod.default || mod;
-        // Enriquecer fotos con geolocalización temporal (vouchers/itinerario).
-        const enriched = enrichPhotosWithGeo(raw);
-        setPhotos(enriched);
+        // Enriquecer fotos con geolocalización temporal (vouchers/itinerario + IndexedDB).
+        const enriched = await enrichPhotosWithGeoAsync(raw);
+        // Deduplicar por id para evitar keys duplicadas de React.
+        const seen = new Set();
+        const unique = enriched.filter((p) => {
+          if (seen.has(p.id)) return false;
+          seen.add(p.id);
+          return true;
+        });
+        setPhotos(unique);
         setLoading(false);
       })
       .catch((err) => {
@@ -127,9 +133,6 @@ export default function GalleryDashboard() {
           </div>
         </div>
       </div>
-
-      {/* Análisis visual con IA */}
-      <PhotoAIAnalyzer />
 
       {/* Grid de fotos */}
       <GalleryGrid

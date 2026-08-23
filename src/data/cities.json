@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Buenos Aires",
-    "days": "28/09 - 01/10",
+    "days": "26/09 - 30/09",
     "region": "Pampeana",
     "highlights": [
       "Obelisco · Plaza de Mayo",
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "name": "Rosario",
-    "days": "02/10 - 05/10",
+    "days": "30/09 - 04/10",
     "region": "Litoral",
     "highlights": [
       "Monumento Nacional a la Bandera",
@@ -26,7 +26,7 @@
   {
     "id": 3,
     "name": "San Carlos de Bariloche",
-    "days": "06/10 - 10/10",
+    "days": "05/10 - 10/10",
     "region": "Patagonia",
     "highlights": [
       "Cerro Catedral · trekking Refugio Frey",
@@ -48,6 +48,7 @@
   {
     "id": 4,
     "name": "Mendoza",
+    "days": "11/10 - 14/10",
     "region": "Cuyo",
     "highlights": [
       "Ruta del Vino · bodegas Maipú",
@@ -68,7 +69,8 @@
   },
   {
     "id": 5,
-    "name": "Jujuy",
+    "name": "Jujuy / Salta",
+    "days": "15/10 - 19/10",
     "region": "Norte",
     "highlights": [
       "Quebrada de Humahuaca · Cerro de Siete Colores",
@@ -90,6 +92,7 @@
   {
     "id": 6,
     "name": "Puerto Iguazú",
+    "days": "19/10 - 22/10",
     "region": "Litoral",
     "highlights": [
       "Cataratas del Iguazú · Garganta del Diablo",
@@ -106,13 +109,23 @@
   },
   {
     "id": 7,
+    "name": "Esteros del Iberá",
+    "days": "22/10 - 24/10",
+    "region": "Litoral",
+    "highlights": [
+      "Colonia Carlos Pellegrini",
+      "Portal Cambyreta",
+      "Safaris en lancha y avistaje de fauna"
+    ]
+  },
+  {
+    "id": 8,
     "name": "Corrientes",
+    "days": "24/10 - 26/10",
     "region": "Litoral",
     "highlights": [
       "Costanera Norte · Puente General Belgrano",
-      "Reserva Natural Esteros del Iberá (Colonia Pellegrini)",
-      "Carnaval Correntino (si en temporada)",
-      "Isla Apipé · Río Paraná"
+      "Teatro Vera · Río Paraná"
     ]
   }
 ]

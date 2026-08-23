@@ -155,9 +155,14 @@ export default function PhotoLightbox({
             >
               🎯 {photo.matchedEvent.name}
               {photo.lat !== undefined && photo.lng !== undefined && (
-                <span style={{ opacity: 0.8, marginLeft: "6px", fontFamily: "monospace" }}>
-                  · {photo.lat.toFixed(4)}, {photo.lng.toFixed(4)}
-                </span>
+                <a
+                  href={`https://www.openstreetmap.org/?mlat=${photo.lat}&mlon=${photo.lng}#map=16/${photo.lat}/${photo.lng}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ opacity: 0.9, marginLeft: "8px", color: "#6EE7B7", textDecoration: "underline", fontFamily: "monospace" }}
+                >
+                  · {photo.lat.toFixed(4)}, {photo.lng.toFixed(4)} (OSM ↗)
+                </a>
               )}
             </p>
           )}

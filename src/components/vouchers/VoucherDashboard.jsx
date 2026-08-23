@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import VoucherForm from "./VoucherForm";
 import VoucherList from "./VoucherList";
 import VoucherViewer from "./VoucherViewer";
+import initialBookingsData from "../../data/initialBookings.json";
 
 const STORAGE_KEY = "travel_bookings";
 
@@ -29,20 +30,26 @@ const CATEGORIES = [
  * garantizando compatibilidad directa con `photoGeoService.ts`.
  */
 export default function VoucherDashboard() {
-  // Cargar vouchers desde localStorage de forma síncrona (inicialización perezosa).
+  // Cargar vouchers desde localStorage de forma síncrona asegurando re-hidratación si está vacío o corrupto
   const [bookings, setBookings] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) return parsed;
+        if (Array.isArray(parsed) && parsed.length >= 10) return parsed;
+      }
+      // Forzar re-hidratación inmediata con initialBookings.json
+      if (Array.isArray(initialBookingsData) && initialBookingsData.length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(initialBookingsData));
+        return initialBookingsData;
       }
     } catch (e) {
-      console.error("VoucherDashboard: Error al leer travel_bookings:", e);
+      console.error("VoucherDashboard: Error al leer/hidratar travel_bookings:", e);
     }
-    return [];
+    return initialBookingsData || [];
   });
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedCity, setSelectedCity] = useState("all");
   const [viewBooking, setViewBooking] = useState(null);
   const [editingBooking, setEditingBooking] = useState(null);
   const [notification, setNotification] = useState(null);
@@ -100,9 +107,22 @@ export default function VoucherDashboard() {
 
   const parsedBookings = bookings.filter((b) => b.isTravelDocument !== false);
 
+  const CITIES_FILTER = [
+    { id: "all", label: "Todas las ciudades" },
+    { id: "Buenos Aires", label: "Buenos Aires" },
+    { id: "Rosario", label: "Rosario" },
+    { id: "Bariloche", label: "Bariloche" },
+    { id: "Mendoza", label: "Mendoza" },
+    { id: "Salta", label: "Jujuy / Salta" },
+    { id: "Iguazú", label: "Puerto Iguazú" },
+    { id: "Esteros del Iberá", label: "Esteros del Iberá" },
+    { id: "Corrientes", label: "Corrientes" },
+  ];
+
   const filtered = parsedBookings.filter((b) => {
-    if (activeCategory === "all") return true;
-    return b.category === activeCategory;
+    const matchCat = activeCategory === "all" || b.category === activeCategory;
+    const matchCity = selectedCity === "all" || (b.location && b.location.toLowerCase().includes(selectedCity.toLowerCase())) || (b.title && b.title.toLowerCase().includes(selectedCity.toLowerCase())) || (b.fileName && b.fileName.toLowerCase().includes(selectedCity.toLowerCase()));
+    return matchCat && matchCity;
   });
 
   const counts = CATEGORIES.reduce((acc, cat) => {
@@ -162,35 +182,62 @@ export default function VoucherDashboard() {
         </p>
       </div>
 
-      {/* Filtros por categoría */}
+      {/* Filtros por categoría y ciudad */}
       <div style={cardStyle}>
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            flexWrap: "wrap",
-            alignItems: "center",
-          }}
-        >
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "8px",
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                style={{
+                  padding: "8px 14px",
+                  borderRadius: "8px",
+                  border: "1px solid #D1D5DB",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  background: activeCategory === cat.id ? "#0B5ED7" : "white",
+                  color: activeCategory === cat.id ? "white" : "#374151",
+                }}
+              >
+                {cat.emoji} {cat.label}{" "}
+                <span style={{ opacity: 0.8 }}>({counts[cat.id] || 0})</span>
+              </button>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <label style={{ fontSize: "13px", fontWeight: 600, color: "#374151" }}>
+              📍 Filtrar por ciudad:
+            </label>
+            <select
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.target.value)}
               style={{
-                padding: "8px 14px",
+                padding: "8px 12px",
                 borderRadius: "8px",
                 border: "1px solid #D1D5DB",
                 fontSize: "13px",
+                background: "white",
+                color: "#374151",
                 fontWeight: 600,
-                cursor: "pointer",
-                background: activeCategory === cat.id ? "#0B5ED7" : "white",
-                color: activeCategory === cat.id ? "white" : "#374151",
               }}
             >
-              {cat.emoji} {cat.label}{" "}
-              <span style={{ opacity: 0.8 }}>({counts[cat.id] || 0})</span>
-            </button>
-          ))}
+              {CITIES_FILTER.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 

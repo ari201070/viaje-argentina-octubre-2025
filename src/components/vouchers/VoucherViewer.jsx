@@ -102,14 +102,14 @@ export default function VoucherViewer({ booking, onClose }) {
                 <span style={{ fontSize: "12px", color: "#1F2937", fontFamily: "monospace" }}>
                   {booking.coordinates.lat.toFixed(6)}, {booking.coordinates.lng.toFixed(6)}
                 </span>
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${booking.coordinates.lat},${booking.coordinates.lng}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ fontSize: "12px", color: "#0369A1", textDecoration: "none", fontWeight: 600 }}
-                >
-                  Ver en mapa ↗
-                </a>
+                 <a
+                   href={`https://www.openstreetmap.org/?mlat=${booking.coordinates.lat}&mlon=${booking.coordinates.lng}#map=16/${booking.coordinates.lat}/${booking.coordinates.lng}`}
+                   target="_blank"
+                   rel="noreferrer"
+                   style={{ fontSize: "12px", color: "#0369A1", textDecoration: "none", fontWeight: 600 }}
+                 >
+                   Ver en OSM ↗
+                 </a>
               </div>
             </div>
           )}

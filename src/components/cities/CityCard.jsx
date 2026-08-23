@@ -1,13 +1,6 @@
 import { useState } from "react";
 import WikilocLink from "./WikilocLink";
 
-const BUTTONS = [
-  { icon: "📍", label: "Actividades" },
-  { icon: "🍴", label: "Restaurantes" },
-  { icon: "🏨", label: "Hotel" },
-  { icon: "🗺️", label: "Mapa" },
-];
-
 export default function CityCard({ city, note, onNoteChange }) {
   const [expanded, setExpanded] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -22,6 +15,55 @@ export default function CityCard({ city, note, onNoteChange }) {
     setDraft(note || "");
     setEditing(false);
   };
+
+  // Coordenadas aproximadas por defecto para cada ciudad si no están explícitas
+  const CITY_COORDS = {
+    1: { lat: -34.6037, lng: -58.3816 }, // Buenos Aires
+    2: { lat: -32.9442, lng: -60.6505 }, // Rosario
+    3: { lat: -41.1335, lng: -71.3103 }, // Bariloche
+    4: { lat: -32.8908, lng: -68.8272 }, // Mendoza
+    5: { lat: -24.1858, lng: -65.2995 }, // Jujuy
+    6: { lat: -25.5972, lng: -54.5766 }, // Iguazú
+    7: { lat: -27.4692, lng: -58.8306 }, // Corrientes
+  };
+
+  const coords = city.coords || CITY_COORDS[city.id] || { lat: -34.6037, lng: -58.3816 };
+  const cityNameEnc = encodeURIComponent(city.name);
+
+  const handleAction = (type) => {
+    // Ejecución asíncrona no bloqueante para evitar violaciones de rendimiento en UI / clics
+    setTimeout(() => {
+      if (type === "Mapa") {
+        window.open(`https://www.openstreetmap.org/?mlat=${coords[0] || coords.lat}&mlon=${coords[1] || coords.lng}#map=14/${coords[0] || coords.lat}/${coords[1] || coords.lng}`, "_blank");
+      } else if (type === "Restaurantes") {
+        window.open(`https://www.openstreetmap.org/search?query=restaurantes+en+${cityNameEnc},+Argentina`, "_blank");
+      } else if (type === "Actividades") {
+        window.open(`https://www.openstreetmap.org/search?query=atracciones+en+${cityNameEnc},+Argentina`, "_blank");
+      } else if (type === "Hotel") {
+        try {
+          const raw = localStorage.getItem("travel_bookings");
+          if (raw) {
+            const bookings = JSON.parse(raw);
+            const match = bookings.find(b => b.category === "hotel" && (b.location?.toLowerCase().includes(city.name.toLowerCase()) || b.title?.toLowerCase().includes(city.name.toLowerCase())));
+            if (match) {
+              window.location.hash = "#documents";
+              return;
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+        window.open(`https://www.openstreetmap.org/search?query=hotel+en+${cityNameEnc},+Argentina`, "_blank");
+      }
+    }, 0);
+  };
+
+  const BUTTONS = [
+    { icon: "📍", label: "Actividades" },
+    { icon: "🍴", label: "Restaurantes" },
+    { icon: "🏨", label: "Hotel" },
+    { icon: "🗺️", label: "Mapa" },
+  ];
 
   return (
     <div
@@ -95,7 +137,23 @@ export default function CityCard({ city, note, onNoteChange }) {
           }}
         >
           {BUTTONS.map((btn) => (
-            <button key={btn.label}>
+            <button
+              key={btn.label}
+              onClick={() => handleAction(btn.label)}
+              style={{
+                padding: "8px 12px",
+                background: "#F3F4F6",
+                border: "1px solid #D1D5DB",
+                borderRadius: "8px",
+                fontSize: "13px",
+                fontWeight: 600,
+                color: "#374151",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
               {btn.icon} {btn.label}
             </button>
           ))}

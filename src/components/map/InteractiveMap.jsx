@@ -4,7 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import itinerary from "../../data/itinerary.json";
 import cities from "../../data/cities.json";
-import { enrichPhotosWithGeo } from "../../services/photoGeoService";
+import { enrichPhotosWithGeoAsync } from "../../services/photoGeoService";
 
 // Ícono personalizado para los marcadores de región
 const customIcon = new L.Icon({
@@ -44,20 +44,27 @@ const REGION_COORDS = {
 export default function InteractiveMap() {
   const [geoPhotos, setGeoPhotos] = useState([]);
 
-  // Cargar galería y enriquecer con geolocalización temporal (vouchers/itinerario).
+  // Cargar galería y enriquecer con geolocalización temporal (vouchers/itinerario + IndexedDB).
   useEffect(() => {
     let cancelled = false;
-    import("../../data/gallery.json")
-      .then((mod) => {
-        if (cancelled) return;
-        const raw = mod.default || mod;
-        const enriched = enrichPhotosWithGeo(raw);
-        // Solo fotos con coordenadas resolubles.
-        setGeoPhotos(enriched.filter((p) => p.lat !== undefined && p.lng !== undefined));
-      })
-      .catch((err) => {
-        console.error("Mapa: Error al cargar fotos para geolocalizar:", err);
-      });
+    requestAnimationFrame(() => {
+      import("../../data/gallery.json")
+        .then(async (mod) => {
+          if (cancelled) return;
+          const raw = mod.default || mod;
+          const enriched = await enrichPhotosWithGeoAsync(raw);
+          const seen = new Set();
+          const unique = enriched.filter((p) => {
+            if (seen.has(p.id)) return false;
+            seen.add(p.id);
+            return true;
+          });
+          setGeoPhotos(unique.filter((p) => p.lat !== undefined && p.lng !== undefined));
+        })
+        .catch((err) => {
+          console.error("Mapa: Error al cargar fotos para geolocalizar:", err);
+        });
+    });
     return () => {
       cancelled = true;
     };
